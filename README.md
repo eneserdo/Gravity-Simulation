@@ -5,6 +5,13 @@ The law of gravity also called Newton's Law was visulaized.
 
 This fun project was done to practice the C++ language.
 
+## Menu
+
+There are two setups:
+
+* Oversimplified simulation of solar system 
+* Randomly initilized space
+
 ## Features
 
 - To add new circle. 
