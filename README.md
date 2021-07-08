@@ -1,16 +1,15 @@
 # Gravity-Simulation
-A simple gravity simulation of the particles via SFML library. Also, elastic collusion was implemented.
+This project visulizes the Newton's law of universal gravitation via SFML library. Elastic collusion was also implemented for more plausable interactions between the objects.
 
-The law of gravity also called Newton's Law was visulaized.
-
-This fun project was done to practice the C++ language.
+The purpose of this fun project was to practice object oriented programming methodology using C++ language.
 
 ## Menu
 
-There are two setups:
+Once completed, there will be two setups:
 
-* Oversimplified simulation of solar system 
 * Randomly initilized space
+* (TODO) Oversimplified simulation of solar system (using sun, earth and moon such that sun is also orbitting around the center of the Milky Way Galaxy)
+
 
 ## Features
 
