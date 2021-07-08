@@ -5,9 +5,12 @@ The purpose of this fun project was to practice object oriented programming meth
 
 ## Menu
 
-Once completed, there will be two setups:
+Once completed, there will be different setups:
 
-* Randomly initilized space
+
+* 2 moving objects around the center of mass
+* 1 moving object around the still object
+* Randomly initilized spaces ()
 * (TODO) Oversimplified simulation of solar system (using sun, earth and moon such that sun is also orbitting around the center of the Milky Way Galaxy)
 
 
