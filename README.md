@@ -7,17 +7,21 @@ The purpose of this fun project was to practice object oriented programming meth
 
 Once completed, there will be different setups:
 
-
-* 2 moving objects around the center of mass
-* 1 moving object around the still object
-* Randomly initilized spaces ()
+* 2D:
+* 2 moving objects around the [barycenter](https://en.wikipedia.org/wiki/Barycenter).
+* 1 moving object around the still object.
+* Randomly initilized space
 * (TODO) Oversimplified simulation of solar system (using sun, earth and moon such that sun is also orbitting around the center of the Milky Way Galaxy)
+
+* 3D (TODO):
 
 
 ## Features
 
-- To add new circle. 
-- To change the speed of the simulation, use q and w.
+- Click the left mouse button to create a new object and move around to set its speed. 
 - Zoom in/out to specific point, sliding the view with two finger 
-- Use curser as a mass
-- Use G, to on and fff the gravity, so you can see the elastic collusions only.
+- <kbd>R</kbd> reset the view.
+- <kbd>Q</kbd> / <kbd>W</kbd> Change the speed of the simulation.
+- <kbd>C</kbd> Use curser as a mass
+- <kbd>G</kbd> On/off the gravity.
+- <kbd>B</kbd> On/off the boundaries.
