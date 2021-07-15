@@ -19,7 +19,7 @@ Once completed, there will be different setups:
 ## Features
 
 - Click the left mouse button to create a new object and move around to set its speed. 
-- Zoom in/out to specific point, sliding the view with two finger 
+- Zoom in/out to specific point (like zooming a map), sliding the view with two finger 
 - <kbd>R</kbd> reset the view.
 - <kbd>Q</kbd> / <kbd>W</kbd> Change the speed of the simulation.
 - <kbd>C</kbd> Use curser as a mass
