@@ -8,11 +8,10 @@ The purpose of this fun project was to practice object oriented programming meth
 Once completed, there will be different setups:
 
 * 2D:
-* 2 moving objects around the [barycenter](https://en.wikipedia.org/wiki/Barycenter).
-* 1 moving object around the still object.
-* Randomly initilized space
-* (TODO) Oversimplified simulation of solar system (using sun, earth and moon such that sun is also orbitting around the center of the Milky Way Galaxy)
-
+  * 2 moving objects around the [barycenter](https://en.wikipedia.org/wiki/Barycenter).
+  * 1 moving object around the still object.
+  * Randomly initilized space
+  * (TODO) Oversimplified simulation of solar system (using sun, earth and moon such that sun is also orbitting around the center of the Milky Way Galaxy)
 * 3D (TODO):
 
 
