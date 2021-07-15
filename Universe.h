@@ -81,6 +81,7 @@ public:
 
 			isGravityOn = true;
 			isBoundsOn = false;
+			;
 
 			planets.addPlanet(Attributes(sf::Vector2f(0,0), sf::Vector2f(100, 100), 10000.f, sf::Color::Red), 0);
 			planets.addPlanet(Attributes(sf::Vector2f(0, 2), sf::Vector2f(500, 100), 5.f, sf::Color::Blue), 1);
