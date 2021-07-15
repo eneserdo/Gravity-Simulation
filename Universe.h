@@ -34,17 +34,20 @@ template<typename Type>
 class Universe
 {
 	Type planets;
+
+	sf::Vector2f cm;
+	sf::CircleShape cmCircle;
+
 	sf::RenderWindow *window;
 	sf::Event ev;
 	vector<sf::Vector2f> forces;
 	sf::VertexArray line;
 	float G;
-	unsigned int numParticles;
 	sf::View view;
 	sf::View resetView;
 	float speed, speedMemory;
 
-	bool isGravityOn, curserMass, isBoundsOn;
+	bool isGravityOn, curserMass, isBoundsOn, CMIsOn=false;
 
 	sf::Vector2f pressedLoc, currentLoc;
 	sf::Vector2i mousePos;
@@ -53,14 +56,18 @@ class Universe
 
 public:
 
-	Universe(float g, unsigned int np, int mode, unsigned int w = 1200, unsigned int h = 900):
+	Universe(float g, unsigned int np, int mode, unsigned int w = 1200, unsigned int h = 900) :
 		planets(np, w, h),
 		G(g),
-		numParticles(np),
 		forces(np),
 		speed(3.f),
-		line(sf::Lines, 2)
+		line(sf::Lines, 2),
+		cmCircle(3.f)
 	{
+		
+		cmCircle.setOrigin(3.f, 3.f);
+		cmCircle.setPosition(cm);
+		cmCircle.setFillColor(sf::Color(200, 10, 10, 100));
 
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 8;
@@ -81,21 +88,19 @@ public:
 
 			isGravityOn = true;
 			isBoundsOn = false;
-			;
 
-			planets.addPlanet(Attributes(sf::Vector2f(0,0), sf::Vector2f(100, 100), 10000.f, sf::Color::Red), 0);
-			planets.addPlanet(Attributes(sf::Vector2f(0, 2), sf::Vector2f(500, 100), 5.f, sf::Color::Blue), 1);
+			planets.addPlanet(Attributes(sf::Vector2f(0,0), sf::Vector2f(100, 100), 1000.f, sf::Color::Red), 0);
+			planets.addPlanet(Attributes(sf::Vector2f(0, 100), sf::Vector2f(1100, 100), 10.f, sf::Color::Blue), 1);
 
 			break;
 		case 2:
-			cout << "Not implemented yet" << endl;
 
 			isGravityOn = true;
 			isBoundsOn = false;
 
-			planets.addPlanet(Attributes(sf::Vector2f(0, 0), sf::Vector2f(100, 100), 10.f, sf::Color::Red), 0);
-			planets.addPlanet(Attributes(sf::Vector2f(0, 0), sf::Vector2f(100, 100), 10.f, sf::Color::Red), 0);
-
+			planets.addPlanet(Attributes(sf::Vector2f(0, 0), sf::Vector2f(100, 100), 1000.f, sf::Color::Red), 0); //Sun
+			planets.addPlanet(Attributes(sf::Vector2f(0, 100), sf::Vector2f(1100, 100), 10.f, sf::Color::Blue), 1);	// Earth
+			planets.addPlanet(Attributes(sf::Vector2f(0, 120), sf::Vector2f(1350, 100), 0.1f, sf::Color::Yellow), 2); // Moon
 
 			break;
 
@@ -114,9 +119,9 @@ public:
 		if (isGravityOn) {
 
 			sf::Vector2f temp;
-			for (size_t i = 0; i < numParticles; i++)
+			for (size_t i = 0; i < planets.getSize(); i++)
 			{
-				for (size_t j = i + 1; j < numParticles; j++)
+				for (size_t j = i + 1; j < planets.getSize(); j++)
 				{
 					temp = G * calcForce(planets[i].mass, planets[j].mass, planets[i].pos, planets[j].pos);
 
@@ -129,7 +134,19 @@ public:
 		// Update velocity and position
 		planets.update(forces, elapsed.asSeconds()*speed, isBoundsOn);
 
+
+		// Find center of mass
+		cm = sf::Vector2f(0, 0);
+		float M=0;
+
+		for (size_t i = 0; i < planets.getSize(); i++) {
+			cm += planets[i].mass*planets[i].pos;
+			M += planets[i].mass;
+		}
+	
+		cmCircle.setPosition(cm/M);
 	}
+
 
 	void clear() {
 		window->clear();
@@ -137,7 +154,7 @@ public:
 
 	void draw() {
 
-		for (size_t i = 0; i < planets.np; i++)
+		for (size_t i = 0; i < planets.getSize(); i++)
 			window->draw(planets[i].posHist);
 		
 		window->draw(planets);
@@ -145,6 +162,10 @@ public:
 		if (length(line)!=0) 
 			window->draw(line);
 		
+		if (CMIsOn)
+			window->draw(cmCircle);
+			
+
 		window->display();
 	}
 
@@ -185,6 +206,10 @@ public:
 				if (ev.key.code == sf::Keyboard::B) {
 					isBoundsOn = !isBoundsOn;
 					cout << "Bounds are on: " << isBoundsOn << endl;
+				}
+				if (ev.key.code == sf::Keyboard::A) {
+					CMIsOn = !CMIsOn;
+					cout << "Center of Mass Is On: " << CMIsOn << endl;
 				}
 
 			}
@@ -241,7 +266,6 @@ public:
 
 				planets.addPlanet(Attributes(sf::Vector2f(0,0), pressedLoc,10.f,sf::Color::Cyan), -1);
 				forces.push_back(sf::Vector2f(0.f, 0.f));
-
 
 			}
 			if (ev.type == sf::Event::MouseButtonReleased) {

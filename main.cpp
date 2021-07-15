@@ -6,7 +6,7 @@
 // Constants
 const unsigned int WINDOW_WIDTH = 1200;
 const unsigned int WINDOW_HEIGHT = 900;
-const float gravitational_const = 100000.f;
+const float gravitational_const = 10000.f;
 const unsigned int numParticlesInElasticMode = 15;
 
 template <typename P>
@@ -52,12 +52,14 @@ int main()
 	
 	int np;
 
-	if (mode==0)
+	if (mode == 0)
 		np = numParticlesInElasticMode;
 
-	else if (mode == 1 || mode==2)
+	else if (mode == 1)
 		np = 2;
 
+	else if (mode == 2)
+		np = 3;
 
 	if (mode<4)
 	{

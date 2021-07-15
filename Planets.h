@@ -43,7 +43,6 @@ private:
 	vector<Attributes> attr;
 
 public:
-	int np;
 	Planets(unsigned int n, unsigned int w, unsigned int h);
 	void init();
 
@@ -52,5 +51,7 @@ public:
 	void addPlanet(Attributes newObj, int index);
 	void deleteCurserPlanet();
 	void setVelocity(sf::Vector2f v);
+
+	int getSize();
 };
 

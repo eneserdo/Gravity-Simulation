@@ -17,7 +17,6 @@ Attributes Planets::operator[](unsigned int i)
 }
 
 Planets::Planets(unsigned int n, unsigned int w, unsigned int h) :
-	np(n),
 	attr(n),
 	vertices(n),
 	width(w),
@@ -28,7 +27,7 @@ void Planets::init()
 {
 	float R;
 
-	for (size_t i = 0; i < np; i++)
+	for (size_t i = 0; i < attr.size(); i++)
 	{
 		
 		vertices[i].setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
@@ -156,8 +155,7 @@ void Planets::update(vector<sf::Vector2f> &force, float delta, bool isBoundsOn) 
 
 	}
 
-
-	for (size_t i = 0; i < np; i++)
+	for (size_t i = 0; i < attr.size(); i++)
 	{
 		attr[i].posHist.add(vertices[i].getPosition());
 	}
@@ -167,9 +165,9 @@ void Planets::update(vector<sf::Vector2f> &force, float delta, bool isBoundsOn) 
 void Planets::addPlanet(Attributes newAttr, int index)
 {
 	sf::CircleShape newCircle;
-	newCircle.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
+	newCircle.setFillColor(newAttr.color);
 
-	newAttr.posHist.init(newAttr.pos, newCircle.getFillColor());
+	newAttr.posHist.init(newAttr.pos, newAttr.color);
 	
 	float R = mToR(newAttr.mass);
 
@@ -181,8 +179,6 @@ void Planets::addPlanet(Attributes newAttr, int index)
 	if (index == -1) {
 		attr.push_back(newAttr);
 		vertices.push_back(newCircle);
-		
-		cout << "pushed back" << endl;
 	}
 	else {
 		attr[index] = newAttr;
@@ -213,4 +209,9 @@ void Planets::deleteCurserPlanet()
 void Planets::setVelocity(sf::Vector2f v)
 {
 	attr.back().velocity = v;
+}
+
+int Planets::getSize()
+{
+	return attr.size();
 }

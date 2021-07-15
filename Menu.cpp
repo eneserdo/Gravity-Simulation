@@ -64,7 +64,7 @@ bool Menu::isOpen()
 
 void Menu::draw()
 {
-	cout << "state: " << state<< endl;
+	//cout << "state: " << state<< endl;
 	auto activeScreen = screens[state];
 
 	window->clear(sf::Color::Black);
@@ -82,7 +82,7 @@ void Menu::eventPolling()
 
 	//cout << "eventPolling" << endl;
 
-	cout << "state2: " << state << endl;
+	//cout << "state2: " << state << endl;
 	auto &activeScreen = screens[state];
 
 	while (window->pollEvent(ev))
